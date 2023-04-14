@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require "keal"
+require "optparse"
+
+# Duplicate arguments before parsing options
+# We will need it later for filtering out the command args
+args = ARGV.dup
+
+options = {}
+OptionParser.new do |o|
+  o.banner = "Usage: keal [options] [command [args]]"
+
+  o.on "-V", "--version", "Print the version then quit" do
+    puts "keal v#{Keal::VERSION}"
+    exit 0
+  end
+
+  o.on "-i", "--idle", "Disable display idle" do |i|
+    options[:idle] = i
+  end
+
+  o.on "-l", "--lock", "Disable locking the user account" do |l|
+    options[:lock] = l
+  end
+
+  o.on "-f", "--force", "Run keal without it's daemon (requires root, not recommended)" do |f|
+    options[:force] = f
+  end
+end.parse!
+
+k = Keal.new(options, args)
+k.run

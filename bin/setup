@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
+
+bundle install
+
+# Install dependencies for extensions
+if ! [ -x "$(command -v dnf)" ]; then
+	echo "Sorry, but we presently only support RPM-based distros."
+	echo "Support for other distros coming soon!"
+	exit 1
+fi
+sudo dnf install -y glibmm2.4-devel ruby-devel make g++

@@ -1,0 +1,12 @@
+[Unit]
+Description=keal system daemon
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/keald
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
