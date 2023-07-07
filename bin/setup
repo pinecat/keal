@@ -11,4 +11,4 @@ if ! [ -x "$(command -v dnf)" ]; then
 	echo "Support for other distros coming soon!"
 	exit 1
 fi
-sudo dnf install -y glibmm2.4-devel ruby-devel make g++
+sudo dnf install -y glibmm2.4-devel ruby-devel rubygems-devel make g++
